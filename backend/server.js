@@ -39,10 +39,6 @@ app.delete('/contactos/:id', async (req, res) => {
     res.sendStatus(204);
 });
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 6cbf9077c79cf4dc3621bc0262296032362fc288
 // Obtener lineas
 app.get('/lineas', async (req, res) => {
     const result = await pool.query('SELECT * FROM linea');
@@ -92,19 +88,6 @@ app.delete('/articulos/:id', async (req, res) => {
 });
 
 
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> 6cbf9077c79cf4dc3621bc0262296032362fc288
 app.post('/login', async (req, res) => {
     const { email, contraseña } = req.body;
     const user = await pool.query('SELECT * FROM usuarios WHERE email = $1', [email]);
