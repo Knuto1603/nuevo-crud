@@ -38,6 +38,55 @@ app.delete('/contactos/:id', async (req, res) => {
     res.sendStatus(204);
 });
 
+// Obtener lineas
+app.get('/lineas', async (req, res) => {
+    const result = await pool.query('SELECT * FROM linea');
+    res.json(result.rows);
+});
+
+// Obtener articulos
+app.get('/articulos', async (req, res) => {
+    const result = await pool.query('SELECT * FROM articulo');
+    res.json(result.rows);
+});
+
+// Agregar articulos
+app.post('/articulos', async (req, res) => {
+    const { idArticulo, descripcion, idLinea, unidad, stock, precioCosto, precioVenta, descuento } = req.body;
+    const result = await pool.query('INSERT INTO articulo (idarticulo, descripcion, idlinea, unidad, stock, preciocosto, precioventa, descuento) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
+        [idArticulo, descripcion, idLinea, unidad, stock, precioCosto, precioVenta, descuento]);
+    res.json(result.rows[0]);
+});
+
+// Editar articulos
+app.put('/articulos/:id', async (req, res) => {
+    const { descripcion, idLinea, unidad, stock, precioCosto, precioVenta, descuento } = req.body;
+    const { id } = req.params;
+    const result = await pool.query(
+    `UPDATE articulo 
+     SET 
+        descripcion = $1,
+        idlinea = $2,
+        unidad = $3,
+        stock = $4,
+        preciocosto = $5,
+        precioventa = $6,
+        descuento = $7
+     WHERE idarticulo = $8
+     RETURNING *`,
+    [descripcion, idLinea, unidad, stock, precioCosto, precioVenta, descuento, idArticulo]
+);
+res.json(result.rows[0]);
+});
+
+// Eliminar articulos
+app.delete('/articulos/:id', async (req, res) => {
+    const { id } = req.params;
+    await pool.query('DELETE FROM articulo WHERE idarticulo = $1', [id]);
+    res.sendStatus(204);
+});
+
+
 app.post('/login', async (req, res) => {
     const { email, contraseña } = req.body;
     const user = await pool.query('SELECT * FROM usuarios WHERE email = $1', [email]);

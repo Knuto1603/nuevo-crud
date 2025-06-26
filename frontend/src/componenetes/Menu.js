@@ -10,7 +10,8 @@ function Menu() {
       <Nav.Link href="/Inicio">Inicio</Nav.Link>
       <Nav.Link href="/caracteristicas">Características</Nav.Link>
       <Nav.Link href="/pricing">Precios</Nav.Link>
-       <Nav.Link button onClick={() => { localStorage.removeItem('token'); 
+      <Nav.Link href="/articulos">Articulos</Nav.Link>
+      <Nav.Link button onClick={() => { localStorage.removeItem('token'); 
                  window.location.href = '/'; }}>Cerrar sesión</Nav.Link>
 
  

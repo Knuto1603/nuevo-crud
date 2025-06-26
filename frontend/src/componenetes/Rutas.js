@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Menu   from './Menu';
 import Login  from './Login';
+import Articulo  from './articulo/Articulo';
 import Principal from '../App';
 import Caracteristicas from './Caracteristicas';
 
@@ -23,6 +24,7 @@ function App() {
 
                 <Route path="/inicio" element={isAuthenticated ? <Inicio/> : <Navigate to="/" />} />
                 <Route path="/caracteristicas" element={isAuthenticated ? <Caracteristicas/> : <Navigate to="/" />} />
+                <Route path="/articulos" element={isAuthenticated ? <Articulo/> : <Navigate to="/" />} />
             </Routes>
              <Footer />
         </Router>
