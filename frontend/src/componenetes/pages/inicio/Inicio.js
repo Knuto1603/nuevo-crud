@@ -1,6 +1,6 @@
 import React from "react";
 
-import "../componenetes/css/inicio.css";
+import "./inicio.css";
 
 const Inicio = () => {
   return (

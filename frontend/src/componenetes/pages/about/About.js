@@ -1,7 +1,7 @@
  const Footer = () => {
   return (
-    <about className="header"> 
+    <section className="header"> 
       <h1>En construcción</h1>
-    </about>
+    </section>
   );
 };

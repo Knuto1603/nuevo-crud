@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../componenetes/css/header.css";
-
-
+import "./header.css";
 
 const Header = () => {
   const [time, setTime] = useState(new Date());

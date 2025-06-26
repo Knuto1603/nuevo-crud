@@ -1,12 +1,12 @@
 import React from "react";
 
-import "../componenetes/css/caracteristicas.css";
+import "./caracteristicas.css";
 
 
 const Caracteristicas = () => {
   return (
     <section className="caracteristicas">
-      <h1>Bienvenidos a Nuestra Nuestras Caracteristicas</h1>
+      <h1>Bienvenidos a Nuestras Caracteristicas</h1>
       <img className="history-image" src="./imagenes/alicorp.jpeg" alt="Nuestra historia"/>
       <p>
         Desde nuestra fundación en <strong>1990</strong>, hemos trabajado con pasión y dedicación para ofrecer

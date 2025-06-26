@@ -1,13 +1,13 @@
 import './App.css';
 
-import Cuerpo from './componenetes/Cuerpo';
+import AppRoutes from './componenetes/routes/RoutesApp';
+
 function App() {
   return (
-    <>
-  {/* Aquí agregamos la cabecera */}
-      <Cuerpo/>
-     
-    </>
+    <div className="App">
+      <AppRoutes />
+    </div>
+      
   );
 }
 

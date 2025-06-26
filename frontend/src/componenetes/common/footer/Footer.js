@@ -1,9 +1,9 @@
 import React from "react";
-import "../componenetes/css/footer.css";
+import "./footer.css";
 
 const Footer = () => {
   return (
-    <footer className="header"> 
+    <footer className="footer"> 
       <p>&copy; {new Date().getFullYear()} Mi Aplicación Web. Todos los derechos reservados.</p>
       <nav>
         <ul>
