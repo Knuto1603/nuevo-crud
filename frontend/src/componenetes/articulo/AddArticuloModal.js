@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import axios from 'axios';
 
-const AddArticuloModal = ({ showModal, handleClose, formData, handleChange, handleAdd }) => {
-    const [lineas, setLineas] = useState([]);  // Almacenará las opciones para el select
-    const [loading, setLoading] = useState(true);  // Estado para mostrar que se está cargando la información
+const AddModal = ({ showModal, handleClose, formData, handleChange, handleAdd, isEditMode }) => {
+    const [lineas, setLineas] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
+   useEffect(() => {
         // Hacer una petición para obtener las opciones del select
         axios.get('http://localhost:5000/lineas')
             .then(response => {
@@ -22,13 +22,13 @@ const AddArticuloModal = ({ showModal, handleClose, formData, handleChange, hand
     return (
         <Modal show={showModal} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Agregar Artículo</Modal.Title>
+                <Modal.Title>{isEditMode ? 'Editar Artículo' : 'Agregar Artículo'}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
                     <Form.Group className="mb-2">
                         <Form.Label>ID Artículo</Form.Label>
-                        <Form.Control name="idArticulo" value={formData.idArticulo} onChange={handleChange} />
+                        <Form.Control name="idArticulo" value={formData.idArticulo} onChange={handleChange} disabled={isEditMode} />
                     </Form.Group>
                     <Form.Group className="mb-2">
                         <Form.Label>Descripción</Form.Label>
@@ -49,7 +49,7 @@ const AddArticuloModal = ({ showModal, handleClose, formData, handleChange, hand
                                 <option key={linea.idlinea} value={linea.idlinea}>{linea.descripcion}</option>
                             ))}
                         </Form.Control>
-                        {loading && <div>Cargando líneas...</div>}  {/* Mensaje de carga */}
+                        {loading && <div>Cargando líneas...</div>}
                     </Form.Group>
                     <Form.Group className="mb-2">
                         <Form.Label>Unidad</Form.Label>
@@ -75,10 +75,10 @@ const AddArticuloModal = ({ showModal, handleClose, formData, handleChange, hand
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>Cancelar</Button>
-                <Button variant="success" onClick={handleAdd}>Guardar</Button>
+                <Button variant="success" onClick={handleAdd}>{isEditMode ? 'Actualizar' : 'Guardar'}</Button>
             </Modal.Footer>
         </Modal>
     );
 };
 
-export default AddArticuloModal;
+export default AddModal;

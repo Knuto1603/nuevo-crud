@@ -74,7 +74,7 @@ app.put('/articulos/:id', async (req, res) => {
         descuento = $7
      WHERE idarticulo = $8
      RETURNING *`,
-    [descripcion, idLinea, unidad, stock, precioCosto, precioVenta, descuento, idArticulo]
+    [descripcion, idLinea, unidad, stock, precioCosto, precioVenta, descuento, id]
 );
 res.json(result.rows[0]);
 });
