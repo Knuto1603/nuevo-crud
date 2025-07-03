@@ -87,6 +87,49 @@ app.delete('/articulos/:id', async (req, res) => {
     res.sendStatus(204);
 });
 
+// Obtener empleados
+app.get('/empleados', async (req, res) => {
+    const result = await pool.query('SELECT * FROM empleado');
+    res.json(result.rows);
+});
+
+// Agregar empleados
+app.post('/empleados', async (req, res) => {
+    const { idEmpleado, paterno, materno, nombres, direccion, telefono, clave } = req.body;
+    const result = await pool.query(
+        'INSERT INTO empleado (idempleado, paterno, materno, nombres, direccion, telefono, clave) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *',
+        [idEmpleado, paterno, materno, nombres, direccion, telefono, clave]
+    );
+    res.json(result.rows[0]);
+});
+
+// Editar empleados
+app.put('/empleados/:id', async (req, res) => {
+    const { paterno, materno, nombres, direccion, telefono, clave } = req.body;
+    const { id } = req.params;
+    const result = await pool.query(
+        `UPDATE empleado 
+         SET 
+            paterno = $1,
+            materno = $2,
+            nombres = $3,
+            direccion = $4,
+            telefono = $5,
+            clave = $6
+         WHERE idempleado = $7
+         RETURNING *`,
+        [paterno, materno, nombres, direccion, telefono, clave, id]
+    );
+    res.json(result.rows[0]);
+});
+
+// Eliminar empleados
+app.delete('/empleados/:id', async (req, res) => {
+    const { id } = req.params;
+    await pool.query('DELETE FROM empleado WHERE idempleado = $1', [id]);
+    res.sendStatus(204);
+});
+
 
 app.post('/login', async (req, res) => {
     const { email, contraseña } = req.body;

@@ -6,6 +6,7 @@ import Login from '../pages/login/Login';
 import Inicio from '../pages/inicio/Inicio';
 import Articulo  from '../pages/articulo/Articulo';
 import Caracteristicas  from '../pages/características/Caracteristicas';
+import Empleado from '../pages/empleado/Empleado';
 
 // Importar componentes de rutas
 import PrivateRoute from './PrivateRoute';
@@ -72,7 +73,16 @@ function AppRoutes() {
             }
           />
 
-
+          <Route
+            path="/empleados"
+            element={
+              <PrivateRoute>
+                <MainLayout>
+                  <Empleado />
+                </MainLayout>
+              </PrivateRoute>
+            }
+          />
 
           {/* Ruta 404 - Para páginas no encontradas */}
           <Route
